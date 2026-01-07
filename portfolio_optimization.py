@@ -1,8 +1,3 @@
-"""
-Portfolio Optimization & Factor Modeling
-Mean-variance optimizer using historical returns of oil stocks with constraints
-"""
-
 import yfinance as yf
 import pandas as pd
 from pypfopt import EfficientFrontier
@@ -154,8 +149,6 @@ def visualize_results(explained_variance, components, cleaned_weights,
     plt.tight_layout(rect=[0, 0, 1, 0.95])
     plt.savefig('portfolio_analysis.png', dpi=150, bbox_inches='tight')
     plt.show()
-    
-    print("\n✅ Analysis complete! Output saved to 'portfolio_analysis.png'")
 
 def main():
     print("=" * 60)
@@ -164,14 +157,11 @@ def main():
     print("=" * 60)
     
     # Fetch and process data
-    print("\n📊 Fetching historical price data...")
     adj_close, returns = fetch_data()
     
     # Portfolio optimization
-    print("⚖️  Running mean-variance optimization...")
     cleaned_weights, expected_return, volatility, sharpe_ratio = optimize_portfolio(adj_close)
     
-    print(f"\n📈 Optimized Portfolio:")
     for ticker, weight in cleaned_weights.items():
         print(f"   {ticker}: {weight:.1%}")
     print(f"\n   Expected Return: {expected_return:.2%}")
@@ -179,20 +169,16 @@ def main():
     print(f"   Sharpe Ratio: {sharpe_ratio:.2f}")
     
     # PCA analysis
-    print("\n🔬 Performing PCA factor extraction...")
     pca, explained_variance, components, factor_returns = perform_pca(returns)
     
-    print(f"\n   Variance explained by top 3 factors:")
     for i, var in enumerate(explained_variance[:3]):
         print(f"   PC{i+1}: {var:.1%}")
     
     # Factor-ETF correlation
-    print("\n📊 Computing factor-ETF correlations...")
     etf_returns = fetch_etf_data()
     correlation_grid = compute_factor_correlations(factor_returns, etf_returns)
     
     # Visualization
-    print("\n🎨 Generating visualizations...")
     visualize_results(explained_variance, components, cleaned_weights,
                      expected_return, sharpe_ratio, factor_returns, correlation_grid)
 
