@@ -17,16 +17,9 @@ python portfolio_optimization.py
 
 Outputs a visualization with scree plot, factor loadings, and correlation heatmap.
 
-## Sample Output
+## Output
 
-| Metric | Value |
-|--------|-------|
-| CVX Weight | ~35% |
-| XOM Weight | ~40% |
-| REP Weight | ~25% |
-| Sharpe Ratio | ~0.8 |
-
-*Actual values depend on the date range.*
+![Output](portfolio_analysis.png)
 
 ---
 
